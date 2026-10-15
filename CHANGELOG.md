@@ -2,6 +2,8 @@
 
 ## 2026-10-15
 
+- tests: locate the pinned FreeRADIUS image binaries independently of its entrypoint PATH setup.
+
 - network: use loose reverse-path filtering inside the isolated exit and adapt disposable tests to the official server binary and tailnet return routes.
 
 - network: stage one-device RADIUS policy compilation and isolated VPN exit runtime/services with unit and disposable CI integration checks.

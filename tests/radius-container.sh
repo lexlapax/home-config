@@ -15,14 +15,16 @@ client loopback_test {
     require_message_authenticator = yes
 }
 CLIENTS
-radius_binary=$(command -v radiusd || command -v freeradius)
+radius_binary=$(find /usr /opt -type f \( -name radiusd -o -name freeradius \) -print -quit)
+radclient_binary=$(find /usr /opt -type f -name radclient -print -quit)
+[[ -n $radius_binary && -n $radclient_binary ]] || { echo "Official image server/client binaries not found" >&2; exit 1; }
 "$radius_binary" -C
 "$radius_binary" -f > /tmp/pilot-radius.log 2>&1 &
 pilot_pid=$!
 trap 'kill "$pilot_pid" 2>/dev/null || true' EXIT
 request() {
   printf 'User-Name = "%s"\nUser-Password = "%s"\nMessage-Authenticator = 0x00000000000000000000000000000000\n' "$1" "$2" |
-    radclient -x -r 1 -t 2 127.0.0.1 auth homeconfig-test-only 2>&1 || true
+    "$radclient_binary" -x -r 1 -t 2 127.0.0.1 auth homeconfig-test-only 2>&1 || true
 }
 ready=0
 for _attempt in 1 2 3 4 5; do
