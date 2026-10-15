@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Device Networks</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">HOME CONTROL</p><h1>Device Networks</h1><p>Choose how each device connects to the internet.</p></header>
+    <aside class="preview"><strong>Preview · sample devices</strong><span>You can review a move. No network settings will change.</span></aside>
+    <section class="profiles" aria-label="Internet paths">
+      <article><span class="dot home"></span><h2>Home</h2><p>Your home internet connection.</p></article>
+      <article><span class="dot vpn"></span><h2>VPN</h2><p>Netherlands exit. Local Wi-Fi devices lose home and admin access; Tailscale access follows its own policies.</p></article>
+    </section>
+    <div class="toolbar"><h2>Your devices</h2><label>Find a device<input id="search" type="search" placeholder="Search by name" autocomplete="off"></label></div>
+    <p id="message" role="status" aria-live="polite"></p>
+    <section id="devices" aria-label="Devices"></section>
+    <section id="review" class="review" aria-labelledby="review-title" hidden tabindex="-1">
+      <div class="review-heading"><h2 id="review-title">Review move</h2><button id="close-review" type="button">Close review</button></div>
+      <p id="review-description"></p><ol id="steps"></ol><div id="notices"></div>
+      <p class="footnote">Live switching and Undo will become available after the routing tests pass.</p>
+    </section>
+    <footer>No SSID or password changes for supported local moves. Remote devices use Tailscale’s exit-node selector.</footer>
+  </main>
+</body>
+</html>
