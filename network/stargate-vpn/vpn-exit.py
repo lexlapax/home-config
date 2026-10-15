@@ -139,7 +139,7 @@ class Manager:
             self.run('ip', 'netns', 'exec', NS, 'wg', 'set', WG, 'private-key', self.data['private_key_file'],
                      'peer', self.data['peer_key'], 'allowed-ips', '0.0.0.0/0,::/0', 'endpoint', self.data['endpoint'], 'persistent-keepalive', '25')
             self.run('ip', '-n', NS, 'link', 'set', WG, 'mtu', str(self.data['mtu']), 'up')
-            self.run('ip', 'netns', 'exec', NS, 'sysctl', '-q', '-w', 'net.ipv4.ip_forward=1', 'net.ipv6.conf.all.forwarding=1')
+            self.run('ip', 'netns', 'exec', NS, 'sysctl', '-q', '-w', 'net.ipv4.ip_forward=1', 'net.ipv6.conf.all.forwarding=1', 'net.ipv4.conf.all.rp_filter=2', 'net.ipv4.conf.default.rp_filter=2')
             for family, tool in [(4, 'iptables-restore'), (6, 'ip6tables-restore')]:
                 rules = firewall(self.data, family)
                 self.run('ip', 'netns', 'exec', NS, tool, '--test', input=rules)

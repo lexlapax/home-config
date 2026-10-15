@@ -15,8 +15,9 @@ client loopback_test {
     require_message_authenticator = yes
 }
 CLIENTS
-radiusd -C
-radiusd -f > /tmp/pilot-radius.log 2>&1 &
+radius_binary=$(command -v radiusd || command -v freeradius)
+"$radius_binary" -C
+"$radius_binary" -f > /tmp/pilot-radius.log 2>&1 &
 pilot_pid=$!
 trap 'kill "$pilot_pid" 2>/dev/null || true' EXIT
 request() {

@@ -11,7 +11,12 @@ if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('HOME_CONFIG_DIS
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from test_payloads import vpn, fixture
 
-run = lambda *args: subprocess.run(args, text=True, capture_output=True, check=True).stdout
+def run(*args):
+    result = subprocess.run(args, text=True, capture_output=True)
+    if result.returncode:
+        print(result.stderr, file=sys.stderr)
+        result.check_returncode()
+    return result.stdout
 before4 = run('ip', '-4', 'route', 'show', 'table', 'main')
 before6 = run('ip', '-6', 'route', 'show', 'table', 'main')
 assert not vpn.MARKER.exists()
@@ -28,6 +33,8 @@ try:
     manager.start()  # Healthy repeated start must not reset firewall or namespace.
     run('ip', '-n', vpn.NS, 'link', 'add', 'tailscale0', 'type', 'dummy')
     run('ip', '-n', vpn.NS, 'link', 'set', 'tailscale0', 'up')
+    run('ip', '-n', vpn.NS, '-4', 'address', 'add', '100.64.0.1/10', 'dev', 'tailscale0')
+    run('ip', '-n', vpn.NS, '-6', 'address', 'add', 'fd7a:115c:a1e0::1/48', 'dev', 'tailscale0')
     for family, source, target in [(4, '100.64.0.10', '198.51.100.99'), (6, 'fd7a:115c:a1e0::10', '2001:db8:3::99')]:
         lookup = run('ip', '-n', vpn.NS, f'-{family}', 'route', 'get', target, 'from', source, 'iif', 'tailscale0')
         assert 'dev wg-vpn' in lookup
