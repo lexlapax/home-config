@@ -1,0 +1,45 @@
+# Dedicated MAC/PAP pilot. No EAP, SQL, proxy, accounting or default virtual server.
+name = homeconfig-radius
+prefix = /usr
+raddbdir = @CONFIG_DIR@
+confdir = ${raddbdir}
+state_dir = @STATE_DIR@
+run_dir = @RUN_DIR@
+logdir = ${state_dir}
+libdir = @LIB_DIR@
+dictdir = @DICT_DIR@
+pidfile = ${run_dir}/${name}.pid
+max_requests = 1024
+max_request_time = 30
+cleanup_delay = 5
+log {
+    destination = stdout
+    auth = no
+    auth_badpass = no
+    auth_goodpass = no
+}
+security {
+    allow_core_dumps = no
+    max_attributes = 200
+    reject_delay = 1
+    status_server = no
+}
+thread pool {
+    start_servers = 1
+    max_servers = 2
+    min_spare_servers = 1
+    max_spare_servers = 2
+}
+$INCLUDE ${confdir}/clients.conf
+modules {
+    pap {
+        normalise = yes
+    }
+    always reject {
+        rcode = reject
+    }
+    files homeconfig_pilot {
+        filename = ${state_dir}/pilot-users
+    }
+}
+$INCLUDE ${confdir}/pilot.site

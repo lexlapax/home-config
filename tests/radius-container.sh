@@ -28,6 +28,14 @@ find_binary() {
   done
   return 1
 }
+mkdir -p /tmp/pilot-radius
+sed -e 's|@CONFIG_DIR@|/etc/raddb|g' \
+    -e 's|@STATE_DIR@|/etc/raddb/homeconfig|g' \
+    -e 's|@RUN_DIR@|/tmp/pilot-radius|g' \
+    -e 's|@LIB_DIR@|/usr/lib/freeradius|g' \
+    -e 's|@DICT_DIR@|/usr/share/freeradius|g' \
+    /payload/network/radius-pilot/radiusd.conf.in > /etc/raddb/radiusd.conf
+cp /etc/raddb/sites-enabled/homeconfig_pilot /etc/raddb/pilot.site
 radius_binary=$(find_binary radiusd freeradius)
 radclient_binary=$(find_binary radclient)
 echo "Validating with $radius_binary"

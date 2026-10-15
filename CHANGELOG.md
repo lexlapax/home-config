@@ -2,6 +2,8 @@
 
 ## 2026-10-15
 
+- network: add a minimal standalone RADIUS pilot server template for private host packaging and validate it with real authentication packets.
+
 - tests: recognize the standard zero tag in RADIUS VLAN reply attributes.
 
 - tests: isolate MAC/PAP parser checks from unrelated stock EAP modules, matching the dedicated pilot configuration.
