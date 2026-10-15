@@ -1,8 +1,24 @@
 # Same-SSID client move: operator test
 
-Status: procedure ready for review; no live test performed. Run only after the operator approves
+Status: blocked at target selection; no assignment saved and no client move performed. Run only after the operator approves
 one named device and the specific Home -> VPN -> Home sequence. Real names, MACs, addresses
 and screenshots remain private. Keep this public document free of filled-in household values.
+
+## Feasibility result (2026-10-15)
+
+Read-only client identification and gateway health checks passed. Opening the per-client override
+form exposed controller-routed Home and DMZ choices, but not the existing third-party-gateway VPN
+network. The draft was canceled without clicking Apply Changes; override remained disabled and
+the client retained its original Home assignment. No reconnect was requested.
+
+This UI workflow cannot currently perform the intended move. Do not force an undocumented API
+value or change the entire SSID/shared port to bypass the selector. Research an AP-level dynamic
+VLAN method, including RADIUS-based assignment, and verify compatibility with the existing
+security mode and 6 GHz before proposing a replacement. This is a candidate, not an approved
+migration. The remote isolated exit design is independent of this controller limitation.
+
+Operator may restore their original Mobile data and VPN settings while this is investigated.
+Repeat phone preparation only when the replacement test is concrete and authorized.
 
 ## Before the test
 

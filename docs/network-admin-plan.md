@@ -59,7 +59,7 @@ Offline devices and static-address clients are excluded from the initial move wo
 
 1. **Preview (implemented):** sample list, search, Home/VPN review and remote instructions.
    No real inventory, credentials or live writes.
-2. **Local proof (pending):** with authorization, test one named client Home -> VPN -> Home,
+2. **Local proof (blocked at target selection):** with authorization, test one named client Home -> VPN -> Home,
    retaining its SSID/password. Verify IPv4, IPv6, DNS, isolation and recovery. Keep separate
    administration access. If override cannot target the required VLAN, revise the design before
    promising same-SSID switching; do not move an entire SSID or shared port as a workaround.
@@ -96,7 +96,9 @@ Prepared: [local one-client procedure](local-client-test.md), [isolated exit des
 manifest](../network/stargate-vpn/README.md), and [remote Samsung test](remote-exit-test.md).
 No live changes have been performed; the manifest is review-only, not an installer.
 
-Next: operator approves one named Samsung test phone and the Home -> VPN -> Home sequence.
+Next: assistant researches a compatible dynamic-VLAN alternative. The current controller override
+selector excludes the third-party VPN network; the draft was canceled and no move was performed.
+After a replacement procedure is prepared, operator approves the named test and sequence.
 Assistant then carries out controller steps through the existing Chrome session and requests only
 the phone checks. Remote implementation can be prepared independently; enrollment, service
 deployment and failure tests require a reviewed payload and operator authorization.
