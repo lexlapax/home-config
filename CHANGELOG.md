@@ -2,6 +2,8 @@
 
 ## 2026-10-15
 
+- tests: recognize the standard zero tag in RADIUS VLAN reply attributes.
+
 - tests: isolate MAC/PAP parser checks from unrelated stock EAP modules, matching the dedicated pilot configuration.
 
 - tests: restrict RADIUS discovery to binary directories and expose parser diagnostics for fictional CI fixtures.

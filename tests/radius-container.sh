@@ -47,7 +47,7 @@ for _attempt in 1 2 3 4 5; do
   sleep 1
 done
 [[ $ready == 1 ]] || { cat /tmp/pilot-radius.log; printf '%s\n' "$response"; exit 1; }
-[[ $response == *'Tunnel-Private-Group-Id = "30"'* ]] || { printf '%s\n' "$response"; exit 1; }
+grep -Eq 'Tunnel-Private-Group-Id(:0)? = "30"' <<< "$response" || { printf '%s\n' "$response"; exit 1; }
 unknown=$(request 020000000002 020000000002)
 [[ $unknown == *Access-Reject* ]] || { printf '%s\n' "$unknown"; exit 1; }
 wrong=$(request 020000000001 incorrect-test-password)
