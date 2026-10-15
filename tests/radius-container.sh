@@ -15,10 +15,20 @@ client loopback_test {
     require_message_authenticator = yes
 }
 CLIENTS
-radius_binary=$(find /usr /opt -type f -executable \( -name radiusd -o -name freeradius \) -print -quit)
-radclient_binary=$(find /usr /opt -type f -executable -name radclient -print -quit)
-[[ -n $radius_binary && -n $radclient_binary ]] || { echo "Official image server/client binaries not found" >&2; exit 1; }
-"$radius_binary" -C
+find_binary() {
+  local directory name
+  for directory in /usr/sbin /usr/bin /usr/local/sbin /usr/local/bin /opt/sbin /opt/bin; do
+    for name in "$@"; do
+      if [[ -x $directory/$name ]]; then printf '%s\n' "$directory/$name"; return 0; fi
+    done
+  done
+  return 1
+}
+radius_binary=$(find_binary radiusd freeradius)
+radclient_binary=$(find_binary radclient)
+echo "Validating with $radius_binary"
+# Debug diagnostics are safe here: this container contains fictional fixtures only.
+"$radius_binary" -XC
 "$radius_binary" -f > /tmp/pilot-radius.log 2>&1 &
 pilot_pid=$!
 trap 'kill "$pilot_pid" 2>/dev/null || true' EXIT
