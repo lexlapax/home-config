@@ -96,9 +96,11 @@ Prepared: [local one-client procedure](local-client-test.md), [isolated exit des
 manifest](../network/stargate-vpn/README.md), and [remote Samsung test](remote-exit-test.md).
 No live changes have been performed; the manifest is review-only, not an installer.
 
-Next: assistant researches a compatible dynamic-VLAN alternative. The current controller override
-selector excludes the third-party VPN network; the draft was canceled and no move was performed.
-After a replacement procedure is prepared, operator approves the named test and sequence.
-Assistant then carries out controller steps through the existing Chrome session and requests only
-the phone checks. Remote implementation can be prepared independently; enrollment, service
-deployment and failure tests require a reviewed payload and operator authorization.
+Researched replacement: [MAC RADIUS pilot](same-ssid-alternatives.md). The installed Home Wi-Fi
+form exposes MAC RADIUS alongside its current personal security and 6 GHz, but this combination
+and the target VLAN are not yet tested. PPSK does not meet the 6 GHz requirement. No settings changed.
+
+Next: assistant stages an isolated one-AP/one-phone RADIUS pilot payload and the independent
+remote-exit payload. Use a temporary pilot SSID before changing production Home authentication;
+that pilot requires one initial SSID join. Operator reviews the concrete scope and privately
+provisions credentials only after the payload is ready. No phone actions are pending now.

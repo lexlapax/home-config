@@ -1,0 +1,24 @@
+{
+  "status": "candidate; sandbox and deployment payload not yet implemented",
+  "ssid": "network-pilot",
+  "scope": "one approved AP and one enrolled test phone",
+  "wifi_authentication": "preserve personal WPA2/WPA3 behavior; no security downgrade",
+  "radius_authorization": "MAC-based VLAN assignment after Wi-Fi authentication",
+  "mac_format": "uppercase hexadecimal; 12 digits; no separators",
+  "unknown_mac": "reject for pilot",
+  "assignment_targets": ["home", "vpn"],
+  "vlan_ids": "private deployment mapping; never infer from the operator label",
+  "radius_reply": {
+    "Tunnel-Type": 13,
+    "Tunnel-Medium-Type": 6,
+    "Tunnel-Private-Group-Id": "string form of the approved target VLAN ID"
+  },
+  "reassignment": "persist mapping, controller reconnect once, observe actual renewed addressing",
+  "coa_required": false,
+  "automatic_home_fallback": false,
+  "six_ghz_compatibility": "must be proved on actual AP and client",
+  "production_ssid_changes": false,
+  "credentials": "privately provisioned; never supplied in this manifest",
+  "admission_source_allowlist": "private approved AP/controller addresses; verify actual source",
+  "radius_implementation": "established server; no custom protocol implementation in web app"
+}

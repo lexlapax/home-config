@@ -20,6 +20,9 @@ migration. The remote isolated exit design is independent of this controller lim
 Operator may restore their original Mobile data and VPN settings while this is investigated.
 Repeat phone preparation only when the replacement test is concrete and authorized.
 
+The [replacement research and pilot plan](same-ssid-alternatives.md) supersedes the blocked
+override procedure below. Do not repeat that procedure unless the target becomes supported.
+
 ## Before the test
 
 Assistant, using the existing signed-in Chrome profile:

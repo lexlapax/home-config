@@ -9,3 +9,6 @@ separate mechanisms. Tailnet permissions remain a separate policy.
 
 [stargate-vpn/](stargate-vpn/README.md) contains the review-only isolated exit design and
 configuration manifest. It uses a separate tunnel/key and does not move the existing local tunnel.
+
+[radius-pilot/design.example.json](radius-pilot/design.example.json) records the candidate
+one-AP/one-phone MAC authorization design; it is not an installer or a production admission policy.
