@@ -20,3 +20,18 @@ Tailscale client's exit-node selection.
 Give clear numbered manual steps with the exact machine, controls and expected result. Every
 handoff states completed work, pending work, the next action and who owns it. Do authorized work
 autonomously; request only the operator actions that actually require them. No agent attribution.
+
+## Configuration instructions for the operator
+
+Thoroughly research configuration instructions before giving them to the operator. Use current
+primary documentation and read-only inspection of the installed versions and actual environment.
+Verify prerequisites, feature compatibility, control labels, commands and consequences. Clearly
+identify anything unverified; never present an assumption as a confirmed procedure.
+
+Provide detailed, numbered steps in execution order. Name the exact machine, application/page,
+control labels and values, or complete commands with their working directory. Explain each step's
+purpose and the clear expected outcome, how to verify it, and where to stop and report back if
+results differ. Include relevant prerequisites, interruptions, recovery/rollback and restoration of
+any temporarily changed settings. Keep secrets private. Resolve routine details yourself instead
+of making the operator guess. For version-dependent UI, verify the visible controls before giving
+instructions and update the procedure if they differ.
