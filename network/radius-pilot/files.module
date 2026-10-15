@@ -1,0 +1,4 @@
+# FreeRADIUS 3.x module; install only in the separate pilot configuration tree.
+files homeconfig_pilot {
+    filename = ${confdir}/homeconfig/pilot-users
+}

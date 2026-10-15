@@ -1,5 +1,5 @@
 {
-  "status": "candidate; sandbox and deployment payload not yet implemented",
+  "status": "policy compiler and FreeRADIUS 3 fragments staged; live pilot not deployed",
   "ssid": "network-pilot",
   "scope": "one approved AP and one enrolled test phone",
   "wifi_authentication": "preserve personal WPA2/WPA3 behavior; no security downgrade",

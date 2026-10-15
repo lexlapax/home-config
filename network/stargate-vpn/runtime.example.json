@@ -1,0 +1,12 @@
+{
+  "address4": "REPLACE_WITH_PRIVATE_DEPLOYMENT_VALUE",
+  "address6": "REPLACE_WITH_PRIVATE_DEPLOYMENT_VALUE",
+  "dns4": "REPLACE_WITH_PRIVATE_DEPLOYMENT_VALUE",
+  "dns6": "REPLACE_WITH_PRIVATE_DEPLOYMENT_VALUE",
+  "endpoint": "REPLACE_WITH_LITERAL_IP_AND_PORT",
+  "peer_key": "REPLACE_WITH_PEER_PUBLIC_KEY",
+  "private_key_file": "/etc/home-config/vpn-exit/private.key",
+  "protected4": ["REPLACE_WITH_SITE_PUBLIC_PREFIXES"],
+  "protected6": ["REPLACE_WITH_SITE_PUBLIC_PREFIXES"],
+  "mtu": 1280
+}

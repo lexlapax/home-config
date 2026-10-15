@@ -1,0 +1,4 @@
+{
+  "vlans": { "home": 30, "vpn": 90 },
+  "devices": [{ "mac": "02:00:00:00:00:01", "target": "home" }]
+}

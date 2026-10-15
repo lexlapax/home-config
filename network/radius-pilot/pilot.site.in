@@ -1,0 +1,23 @@
+# REVIEW TEMPLATE: replace @LISTEN_ADDRESS@ privately before parsing or enabling.
+server homeconfig_pilot {
+    listen {
+        type = auth
+        ipaddr = @LISTEN_ADDRESS@
+        port = 1812
+    }
+    authorize {
+        if (!&User-Name || &User-Name !~ /^[0-9A-F]{12}$/) {
+            reject
+        }
+        homeconfig_pilot
+        if (!&control:Cleartext-Password) {
+            reject
+        }
+        pap
+    }
+    authenticate {
+        Auth-Type PAP {
+            pap
+        }
+    }
+}

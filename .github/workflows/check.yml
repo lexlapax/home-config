@@ -1,0 +1,41 @@
+name: Staged payload checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+      - run: npm test
+        working-directory: apps/network-admin
+      - run: shellcheck tests/radius-container.sh
+  radius-parser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile fictional fixture privately
+        run: |
+          mkdir -p "$RUNNER_TEMP/radius-fixtures"
+          python3 network/radius-pilot/compile-policy.py network/radius-pilot/policy.example.json --output "$RUNNER_TEMP/radius-fixtures/pilot-users"
+      - name: Parse and authenticate in isolated official FreeRADIUS image
+        run: |
+          docker run --rm --network none \
+            -e HOME_CONFIG_RADIUS_CONTAINER=1 \
+            -v "$PWD:/payload:ro" \
+            -v "$RUNNER_TEMP/radius-fixtures:/fixtures:ro" \
+            --entrypoint /bin/bash \
+            freeradius/freeradius-server@sha256:92be0ce81ee2bf80a690a33109399555194b84b8162c5a84950b2fead9f10d95 \
+            /payload/tests/radius-container.sh
+  namespace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install disposable-runner test tools
+        run: sudo apt-get update && sudo apt-get install -y wireguard-tools iptables
+      - name: Exercise namespace and both firewall families without real credentials
+        run: sudo env GITHUB_ACTIONS=true HOME_CONFIG_DISPOSABLE_TESTS=1 PYTHONDONTWRITEBYTECODE=1 python3 tests/namespace-disposable.py

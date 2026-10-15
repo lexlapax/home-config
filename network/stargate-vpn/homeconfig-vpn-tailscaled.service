@@ -1,0 +1,23 @@
+[Unit]
+Description=Independent stargate-vpn Tailscale exit instance
+Requires=homeconfig-vpn-netns.service
+BindsTo=homeconfig-vpn-netns.service
+After=homeconfig-vpn-netns.service
+ConditionPathExists=/etc/home-config/vpn-exit/enabled
+ConditionPathExists=/etc/home-config/vpn-exit/syspolicy.json
+
+[Service]
+Type=simple
+RuntimeDirectory=tailscale-vpn
+RuntimeDirectoryMode=0700
+StateDirectory=tailscale-vpn
+StateDirectoryMode=0700
+ExecStartPre=/usr/bin/python3 /usr/local/libexec/home-config/vpn-exit.py status
+ExecStart=/usr/bin/ip netns exec stargate-vpn /usr/bin/tailscaled --tun=tailscale0 --port=41642 --syspolicy-file=/etc/home-config/vpn-exit/syspolicy.json --socket=/run/tailscale-vpn/tailscaled.sock --statedir=/var/lib/tailscale-vpn
+Restart=on-failure
+RestartSec=5
+UMask=0077
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target

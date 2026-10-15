@@ -1,0 +1,17 @@
+[Unit]
+Description=Isolated VPN exit network namespace
+Wants=network-online.target
+After=network-online.target
+Before=homeconfig-vpn-tailscaled.service
+ConditionPathExists=/etc/home-config/vpn-exit/enabled
+ConditionPathExists=/etc/home-config/vpn-exit/runtime.json
+ConditionPathExists=/etc/netns/stargate-vpn/resolv.conf
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/python3 /usr/local/libexec/home-config/vpn-exit.py start
+ExecStop=/usr/bin/python3 /usr/local/libexec/home-config/vpn-exit.py stop
+UMask=0077
+TimeoutStartSec=45
+TimeoutStopSec=30

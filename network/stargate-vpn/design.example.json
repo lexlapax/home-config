@@ -1,5 +1,5 @@
 {
-  "status": "review-only; not a deployable configuration",
+  "status": "design manifest; runtime/services staged separately; deployment not approved",
   "operator_profile": "vpn",
   "exit_identity": "stargate-vpn",
   "network_namespace": "stargate-vpn",

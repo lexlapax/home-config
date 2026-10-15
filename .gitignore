@@ -10,3 +10,6 @@ state/
 *.pcap
 *.pcapng
 .DS_Store
+
+__pycache__/
+*.pyc

@@ -100,7 +100,8 @@ Researched replacement: [MAC RADIUS pilot](same-ssid-alternatives.md). The insta
 form exposes MAC RADIUS alongside its current personal security and 6 GHz, but this combination
 and the target VLAN are not yet tested. PPSK does not meet the 6 GHz requirement. No settings changed.
 
-Next: assistant stages an isolated one-AP/one-phone RADIUS pilot payload and the independent
-remote-exit payload. Use a temporary pilot SSID before changing production Home authentication;
+Staged: the one-device RADIUS policy compiler, server fragments, isolated VPN namespace helper
+and separate Tailscale service units. See [payload review](staged-payload-review.md).
+Next: finish disposable native/parser checks, then prepare the private deployment-specific diff. Use a temporary pilot SSID before changing production Home authentication;
 that pilot requires one initial SSID join. Operator reviews the concrete scope and privately
 provisions credentials only after the payload is ready. No phone actions are pending now.

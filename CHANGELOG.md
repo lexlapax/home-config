@@ -2,6 +2,8 @@
 
 ## 2026-10-15
 
+- network: stage one-device RADIUS policy compilation and isolated VPN exit runtime/services with unit and disposable CI integration checks.
+
 - network: research same-SSID alternatives and specify an isolated MAC RADIUS pilot with explicit WPA3/6 GHz and production rollout gates.
 
 - network: record unavailable third-party VPN override target; cancel the unsaved client test and require a compatible replacement design.

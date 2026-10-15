@@ -30,3 +30,7 @@ and [remote exit test](docs/remote-exit-test.md). These are drafts; no live exit
 
 The override test found an unsupported target. See [the researched replacement and isolated
 MAC RADIUS pilot](docs/same-ssid-alternatives.md); current household Wi-Fi remains unchanged.
+
+Staged implementation and verification boundaries: [payload review](docs/staged-payload-review.md).
+Run `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v` for non-root payload tests.
+The GitHub workflow also checks the server parser and Linux namespace in disposable environments.
