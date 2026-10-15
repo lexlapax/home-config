@@ -19,9 +19,11 @@ route exit-node clients through the VPN.
 Recommended remote design: a second Tailscale instance, isolated with its own persistent identity
 and network namespace or container, advertising exit-node capability as `stargate-vpn`. Review
 its transit routing, IPv4/IPv6 NAT, DNS, return paths, MTU and firewall ordering before deployment.
-Separate Tailscale transport/control traffic from forwarded client internet traffic so rules do not
-accidentally route or permit the wrong traffic. Reuse of the existing VPN tunnel is a design goal,
-not a validated configuration. Preserve the existing exit node, subnet router and DNS services.
+Use a new WireGuard tunnel as the namespace's only ordinary internet interface. Its encrypted
+socket stays in the host namespace; Tailscale control/peer traffic and forwarded client internet
+traffic all traverse the new VPN tunnel. This revises the shared-tunnel goal: a separate VPN
+configuration/key avoids changing the working local tunnel. Preserve the existing exit node,
+subnet router and DNS services. See [the isolated design](../network/stargate-vpn/README.md).
 
 A central web service cannot generally choose the exit node on unmanaged phones. Version one
 provides exact client instructions. Endpoint management could be evaluated separately later.
@@ -90,6 +92,11 @@ No household inventory or existing private repository files are published here.
 
 ## Immediate next action
 
-Assistant: prepare the exact local one-client test and remote namespace/routing draft, with rollback
-and validation steps. Operator: approve the named device and live test when the concrete procedure
-is ready. No live changes or credential provisioning are needed to run the current local preview.
+Prepared: [local one-client procedure](local-client-test.md), [isolated exit design and configuration
+manifest](../network/stargate-vpn/README.md), and [remote Samsung test](remote-exit-test.md).
+No live changes have been performed; the manifest is review-only, not an installer.
+
+Next: operator approves one named Samsung test phone and the Home -> VPN -> Home sequence.
+Assistant then carries out controller steps through the existing Chrome session and requests only
+the phone checks. Remote implementation can be prepared independently; enrollment, service
+deployment and failure tests require a reviewed payload and operator authorization.

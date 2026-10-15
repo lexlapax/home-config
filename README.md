@@ -23,3 +23,7 @@ and authenticated access are later deployment steps.
 See [the implementation plan](docs/network-admin-plan.md) for what is proven, what remains,
 and the next operator action. System deployment configuration currently remains in the separate
 `dotsetup` repository; no private material is copied here.
+
+Review-ready procedures: [same-SSID local test](docs/local-client-test.md),
+[isolated stargate-vpn design](network/stargate-vpn/README.md),
+and [remote exit test](docs/remote-exit-test.md). These are drafts; no live exit or client switch has been deployed.

@@ -6,3 +6,6 @@ examples. Actual household inventory and deployment values are private and are n
 The initial operator profiles are `home` and `vpn`. For remote Tailscale clients the intended exit
 identities are `stargate` and `stargate-vpn`. Local VLAN assignment and remote internet egress are
 separate mechanisms. Tailnet permissions remain a separate policy.
+
+[stargate-vpn/](stargate-vpn/README.md) contains the review-only isolated exit design and
+configuration manifest. It uses a separate tunnel/key and does not move the existing local tunnel.

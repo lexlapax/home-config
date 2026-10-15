@@ -1,0 +1,49 @@
+{
+  "status": "review-only; not a deployable configuration",
+  "operator_profile": "vpn",
+  "exit_identity": "stargate-vpn",
+  "network_namespace": "stargate-vpn",
+  "tunnel_interface": "wg-vpn",
+  "tailscale_interface": "tailscale0",
+  "ordinary_network_interfaces": [],
+  "wireguard_socket_birthplace": "host",
+  "wireguard_interface_location": "stargate-vpn",
+  "independent_vpn_credential": true,
+  "reuse_existing_tunnel_or_key": false,
+  "underlay": "existing host WAN; encrypted WireGuard transport only",
+  "namespace_default_egress": "wg-vpn",
+  "families": ["ipv4", "ipv6"],
+  "namespace_dns": "private deployment VPN resolver addresses",
+  "tailscale": {
+    "socket": "/run/tailscale-vpn/tailscaled.sock",
+    "state_directory": "/var/lib/tailscale-vpn",
+    "hostname": "stargate-vpn",
+    "accept_dns": false,
+    "accept_routes": false,
+    "advertise_exit_node": true,
+    "advertise_subnet_routes": [],
+    "ssh": false,
+    "webclient": false
+  },
+  "forwarding": {
+    "allowed_new_path": "tailscale0 -> wg-vpn",
+    "allowed_return_path": "wg-vpn -> tailscale0; established/related only",
+    "nat": "IPv4 and IPv6; only exit-client traffic leaving wg-vpn",
+    "deny_private_and_site_destinations": true,
+    "vpn_dns_exception": "exact configured resolvers, TCP/UDP 53 only",
+    "guard_before_tailscale_accepts": true
+  },
+  "failure_policy": {
+    "vpn_down": "no internet; exit may become unreachable",
+    "missing_default_routes": "unreachable; no WAN interface or fallback",
+    "automatic_home_fallback": false,
+    "other_exit_nodes": "client must explicitly choose; inspect managed auto-selection policy"
+  },
+  "private_inputs_required": [
+    "new independent VPN private-key file",
+    "VPN peer public key and literal endpoint address/port",
+    "VPN IPv4 and IPv6 tunnel addresses and resolver addresses",
+    "tailnet enrollment and restricted exit-node tag/policy",
+    "site private/public protected destination prefixes"
+  ]
+}
