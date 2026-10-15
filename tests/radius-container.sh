@@ -15,8 +15,8 @@ client loopback_test {
     require_message_authenticator = yes
 }
 CLIENTS
-radius_binary=$(find /usr /opt -type f \( -name radiusd -o -name freeradius \) -print -quit)
-radclient_binary=$(find /usr /opt -type f -name radclient -print -quit)
+radius_binary=$(find /usr /opt -type f -executable \( -name radiusd -o -name freeradius \) -print -quit)
+radclient_binary=$(find /usr /opt -type f -executable -name radclient -print -quit)
 [[ -n $radius_binary && -n $radclient_binary ]] || { echo "Official image server/client binaries not found" >&2; exit 1; }
 "$radius_binary" -C
 "$radius_binary" -f > /tmp/pilot-radius.log 2>&1 &
