@@ -2,6 +2,8 @@
 
 ## 2026-10-15
 
+- tests: isolate MAC/PAP parser checks from unrelated stock EAP modules, matching the dedicated pilot configuration.
+
 - tests: restrict RADIUS discovery to binary directories and expose parser diagnostics for fictional CI fixtures.
 
 - tests: restrict container binary discovery to executable files so package metadata cannot be selected.

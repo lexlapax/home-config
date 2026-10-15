@@ -5,6 +5,10 @@ set -euo pipefail
 cp /payload/network/radius-pilot/files.module /etc/raddb/mods-enabled/homeconfig_pilot
 sed 's/@LISTEN_ADDRESS@/127.0.0.1/' /payload/network/radius-pilot/pilot.site.in > /etc/raddb/sites-enabled/homeconfig_pilot
 rm -f /etc/raddb/sites-enabled/default /etc/raddb/sites-enabled/inner-tunnel
+# The MAC/PAP pilot must not load unrelated stock EAP/SQL/etc. modules.
+for module in /etc/raddb/mods-enabled/*; do
+  case ${module##*/} in pap|always|homeconfig_pilot) ;; *) rm -f "$module" ;; esac
+done
 mkdir -p /etc/raddb/homeconfig
 cp /fixtures/pilot-users /etc/raddb/homeconfig/pilot-users
 chmod 644 /etc/raddb/homeconfig/pilot-users

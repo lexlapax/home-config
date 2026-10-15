@@ -51,7 +51,7 @@ container test likewise requires a disposable container and publishes no host po
    approved phone identity, Home/VPN VLAN IDs, RADIUS source allowlist, package/runtime versions,
    listen address and protected destination prefixes. Keep them out of this public repository.
 2. Stage a SEPARATE FreeRADIUS configuration directory using the chosen installed version's
-   stock dictionaries/modules. Enable only `pap`, the dedicated files module and dedicated site
+   stock dictionaries/modules. Enable only `pap`, `always` (for reject), the dedicated files module and dedicated site
    for the pilot. Do not overwrite an existing global RADIUS server/configuration. The users file
    belongs under that tree's `homeconfig/pilot-users`; set service-readable ownership/mode after
    privileged installation while retaining restrictive access.
